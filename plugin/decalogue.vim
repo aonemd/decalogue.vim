@@ -1,7 +1,7 @@
 if exists('g:loaded_decalogue') | finish | endif
 let g:loaded_decalogue = 1
 
-command Decalogue call decalogue#commandments#execute()
+command Decalogue call decalogue#commandments#execute_noisy()
 command DecalogueSilent call decalogue#commandments#execute_silent()
 
 let s:decalogue_command = get(g:, 'decalogue_command', '<leader>dc')

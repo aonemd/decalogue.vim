@@ -1,22 +1,29 @@
-function! decalogue#commandments#execute() abort
-  let s:full_commandments = get(g:, 'decalogue_commandments', {})
-  let numbered_commandments = s:convert_commandments_to_numbered_entries(s:full_commandments)
+function! decalogue#commandments#execute_noisy() abort
+  function! s:exeute_noisy(cmd) closure
+		execute(a:cmd)
+  endfunction
 
-	let selection = inputlist(l:numbered_commandments)
-	if (l:selection != 0 && l:selection <= len(s:full_commandments))
-    let selected_key = keys(s:full_commandments)[l:selection - 1]
-		execute(s:full_commandments[l:selected_key])
-	endif
+  call s:run_and_execute(funcref('s:exeute_noisy'))
 endfunction
 
 function! decalogue#commandments#execute_silent() abort
+  function! s:exeute_silent(cmd) closure
+		execute('silent ' . a:cmd) | execute 'redraw!'
+  endfunction
+
+  call s:run_and_execute(funcref('s:exeute_silent'))
+endfunction
+
+
+function! s:run_and_execute(exec_func) abort
   let s:full_commandments = get(g:, 'decalogue_commandments', {})
   let numbered_commandments = s:convert_commandments_to_numbered_entries(s:full_commandments)
 
 	let selection = inputlist(l:numbered_commandments)
 	if (l:selection != 0 && l:selection <= len(s:full_commandments))
     let selected_key = keys(s:full_commandments)[l:selection - 1]
-		execute('silent ' . s:full_commandments[l:selected_key]) | execute 'redraw!'
+
+    call a:exec_func(s:full_commandments[l:selected_key])
 	endif
 endfunction
 
