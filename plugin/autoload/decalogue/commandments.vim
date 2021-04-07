@@ -1,4 +1,4 @@
-function! decalogue#commandments#run() abort
+function! decalogue#commandments#execute() abort
   let s:full_commandments = get(g:, 'decalogue_commandments', {})
   let numbered_commandments = s:convert_commandments_to_numbered_entries(s:full_commandments)
 
@@ -6,6 +6,17 @@ function! decalogue#commandments#run() abort
 	if (l:selection != 0 && l:selection <= len(s:full_commandments))
     let selected_key = keys(s:full_commandments)[l:selection - 1]
 		execute(s:full_commandments[l:selected_key])
+	endif
+endfunction
+
+function! decalogue#commandments#execute_silent() abort
+  let s:full_commandments = get(g:, 'decalogue_commandments', {})
+  let numbered_commandments = s:convert_commandments_to_numbered_entries(s:full_commandments)
+
+	let selection = inputlist(l:numbered_commandments)
+	if (l:selection != 0 && l:selection <= len(s:full_commandments))
+    let selected_key = keys(s:full_commandments)[l:selection - 1]
+		execute('silent ' . s:full_commandments[l:selected_key]) | execute 'redraw!'
 	endif
 endfunction
 
