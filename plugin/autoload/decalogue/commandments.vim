@@ -1,17 +1,17 @@
 function! decalogue#commandments#execute_noisy() abort
-  function! s:exeute_noisy(cmd) closure
+  function! s:execute_noisy(cmd) closure
 		execute('!' . a:cmd)
   endfunction
 
-  call s:run_and_execute(funcref('s:exeute_noisy'))
+  call s:run_and_execute(funcref('s:execute_noisy'))
 endfunction
 
 function! decalogue#commandments#execute_silent() abort
-  function! s:exeute_silent(cmd) closure
+  function! s:execute_silent(cmd) closure
 		execute('silent ' . '!' . a:cmd) | execute 'redraw!'
   endfunction
 
-  call s:run_and_execute(funcref('s:exeute_silent'))
+  call s:run_and_execute(funcref('s:execute_silent'))
 endfunction
 
 
