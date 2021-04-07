@@ -1,6 +1,6 @@
 function! decalogue#commandments#execute_noisy() abort
   function! s:exeute_noisy(cmd) closure
-		execute(a:cmd)
+		execute('!' . a:cmd)
   endfunction
 
   call s:run_and_execute(funcref('s:exeute_noisy'))
@@ -8,7 +8,7 @@ endfunction
 
 function! decalogue#commandments#execute_silent() abort
   function! s:exeute_silent(cmd) closure
-		execute('silent ' . a:cmd) | execute 'redraw!'
+		execute('silent ' . '!' . a:cmd) | execute 'redraw!'
   endfunction
 
   call s:run_and_execute(funcref('s:exeute_silent'))
