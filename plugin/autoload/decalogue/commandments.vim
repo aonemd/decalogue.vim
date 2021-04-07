@@ -12,7 +12,7 @@ endfunction
 "convert full_commandments hash into a numbered list
 function! s:convert_commandments_to_numbered_entries(commandments_hash) abort
     let index = 1
-    let numbered_list = ['Commandments: ']
+    let numbered_list = ['Commandments:']
 
     for key in keys(a:commandments_hash)
       let numbered_list = add(l:numbered_list, l:index . ': ' . key)
