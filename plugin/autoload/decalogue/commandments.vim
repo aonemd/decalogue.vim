@@ -17,6 +17,8 @@ function! decalogue#commandments#run() abort
     return l:taskList
   endfunction
 
+  call s:append_custom_commandments()
+
 	" Runs the given task number.
 	let selection = inputlist(funcref('GetNumberedDictKeys')(s:full_commandments))
 
@@ -24,4 +26,12 @@ function! decalogue#commandments#run() abort
 		let taskKeys = sort(keys(s:full_commandments))
 		execute(s:full_commandments[l:taskKeys[l:selection - 1]])
 	endif
+endfunction
+
+"read globally set commandments and append them to full_commandments
+function! s:append_custom_commandments() abort
+  let g:decalogue_commandments = get(g:, 'decalogue_commandments', {})
+  for key in keys(g:decalogue_commandments)
+    let s:full_commandments[key] = g:decalogue_commandments[key]
+  endfor
 endfunction
