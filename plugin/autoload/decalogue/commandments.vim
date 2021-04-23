@@ -11,7 +11,7 @@ function! decalogue#commandments#execute_in_background() abort
 		execute('silent ' . a:cmd) | execute 'redraw!'
   endfunction
 
-  call s:run_and_execute(funcref('s:execute_in_background'), "Commandments (async):")
+  call s:run_and_execute(funcref('s:execute_in_background'), "Commandments (silent):")
 endfunction
 
 
