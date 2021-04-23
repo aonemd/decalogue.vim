@@ -21,7 +21,7 @@ function! s:run_and_execute(exec_func, menu_title) abort
 
 	let selection = inputlist(l:numbered_commandments)
 	if (l:selection != 0 && l:selection <= len(s:full_commandments))
-    let selected_key = keys(s:full_commandments)[l:selection - 1]
+    let selected_key = sort(keys(s:full_commandments))[l:selection - 1]
 
     call a:exec_func(s:full_commandments[l:selected_key])
 	endif
@@ -34,7 +34,7 @@ function! s:convert_commandments_to_numbered_entries(commandments_hash, ...) abo
     let title = get(a:, 1, "Commandments:")
     let numbered_list = [title]
 
-    for key in keys(a:commandments_hash)
+    for key in sort(keys(a:commandments_hash))
       let numbered_list = add(l:numbered_list, l:index . ': ' . key)
       let index += 1
     endfor
