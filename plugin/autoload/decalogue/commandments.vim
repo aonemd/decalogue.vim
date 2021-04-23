@@ -1,17 +1,17 @@
-function! decalogue#commandments#execute_noisy() abort
-  function! s:execute_noisy(cmd) closure
+function! decalogue#commandments#execute_in_foreground() abort
+  function! s:execute_in_foreground(cmd) closure
 		execute(a:cmd)
   endfunction
 
-  call s:run_and_execute(funcref('s:execute_noisy'))
+  call s:run_and_execute(funcref('s:execute_in_foreground'))
 endfunction
 
-function! decalogue#commandments#execute_silent() abort
-  function! s:execute_silent(cmd) closure
+function! decalogue#commandments#execute_in_background() abort
+  function! s:execute_in_background(cmd) closure
 		execute('silent ' . a:cmd) | execute 'redraw!'
   endfunction
 
-  call s:run_and_execute(funcref('s:execute_silent'))
+  call s:run_and_execute(funcref('s:execute_in_background'))
 endfunction
 
 

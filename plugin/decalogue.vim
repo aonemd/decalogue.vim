@@ -1,8 +1,8 @@
 if exists('g:loaded_decalogue') | finish | endif
 let g:loaded_decalogue = 1
 
-command Decalogue call decalogue#commandments#execute_noisy()
-command DecalogueSilent call decalogue#commandments#execute_silent()
+command Decalogue call decalogue#commandments#execute_in_foreground()
+command DecalogueSilent call decalogue#commandments#execute_in_background()
 command! -nargs=1 DecalogueRunSilent execute 'silent !' . <q-args> | execute 'redraw!'
 
 let s:decalogue_command = get(g:, 'decalogue_command', '<leader>dc')
